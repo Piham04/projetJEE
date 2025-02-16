@@ -1,5 +1,4 @@
 package com.example.gymspring.controller;
-
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;

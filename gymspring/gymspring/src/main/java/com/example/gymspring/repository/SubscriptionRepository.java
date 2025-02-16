@@ -1,6 +1,5 @@
 package com.example.gymspring.repository;
 
-
 import java.time.LocalDate;
 import java.util.List;
 

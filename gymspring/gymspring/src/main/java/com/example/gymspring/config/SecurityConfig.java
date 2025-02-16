@@ -43,18 +43,19 @@ public class SecurityConfig {
 			.cors(cors -> cors.configurationSource(corsConfigurationSource()))
 			.authorizeHttpRequests(auth -> auth
 				.requestMatchers("/api/auth/**").permitAll()
-				.requestMatchers("/api/customers/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_EMPLOYEE")
-				//.requestMatchers("/api/packs/**").hasAnyAuthority("ROLE_ADMIN")
-				//.requestMatchers("/api/subscriptions/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_EMPLOYEE")
+				//.requestMatchers("/api/customers/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_EMPLOYEE")
+				.requestMatchers("/api/customers/**").permitAll()
+				.requestMatchers("/api/packs/**").permitAll()
+				.requestMatchers("/api/subscriptions/**").permitAll()
 				//.requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
 				.requestMatchers("/api/admin/**").hasAuthority("ROLE_ADMIN")
 				.anyRequest().authenticated()
-			)
-			.addFilterBefore(new JwtFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class)  // Ajout du filtre ici
+			);
+			/*.addFilterBefore(new JwtFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class)  // Ajout du filtre ici
 			.exceptionHandling(ex -> ex.authenticationEntryPoint((request, response, authException) -> {
-				System.out.println("🚨 Accès refusé : " + authException.getMessage());
+				System.out.println("Accès refusé : " + authException.getMessage());
 				response.sendError(HttpServletResponse.SC_FORBIDDEN);
-			}));
+			}));*/
 		return http.build();
 	}
 

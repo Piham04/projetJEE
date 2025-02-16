@@ -1,5 +1,4 @@
 package com.example.gymspring.model;
-
 import java.time.LocalDate;
 
 import jakarta.persistence.Column;
@@ -40,5 +39,3 @@ public class Subscription {
 	@Column(nullable = false)
 	private LocalDate startDate;
 }
-
-

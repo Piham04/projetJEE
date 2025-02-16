@@ -22,20 +22,17 @@ public class CustomerController {
 	}
 //Ajouter un client
 @PostMapping
-@PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_EMPLOYEE')")
 public ResponseEntity<Customer> addCustomer(@Validated @RequestBody Customer customer) {
 	return ResponseEntity.ok(customerService.addCustomer(customer));
 }
 //Obtenir la liste des clients
 @GetMapping
-@PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_EMPLOYEE')")
 public ResponseEntity<List<Customer>> getAllCustomers() {
 	return ResponseEntity.ok(customerService.getAllCustomers());
 }
 
 //Obtenir un client par son id
 @GetMapping("/{id}")
-@PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_EMPLOYEE')")
 public ResponseEntity<Customer> getCustomerById(@PathVariable Long id) {
 	return customerService.getCustomerById(id)
 		.map(ResponseEntity::ok)
@@ -43,14 +40,12 @@ public ResponseEntity<Customer> getCustomerById(@PathVariable Long id) {
 }
 //Obtenir les clients ayant un abonnement actif
 @GetMapping("/active")
-@PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_EMPLOYEE')")
 public ResponseEntity<List<Customer>> getCustomersWithActiveSubscription() {
 	return ResponseEntity.ok(customerService.getCustomersWithActiveSubscription());
 }
 
 //Mise à jour d'un client
 @PutMapping("/{id}")
-@PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_EMPLOYEE')")
 public ResponseEntity<Customer> updateCustomer(@PathVariable Long id, @Validated @RequestBody Customer customer) {
 	try {
 		return ResponseEntity.ok(customerService.updateCustomer(id, customer));
@@ -61,7 +56,6 @@ public ResponseEntity<Customer> updateCustomer(@PathVariable Long id, @Validated
 
 //Archiver un client
 @PutMapping("/{id}/archive")
-@PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_EMPLOYEE')")
 public ResponseEntity<String> archiveCustomer(@PathVariable Long id) {
     try {
         Customer customer = customerService.getCustomerById(id)
@@ -73,7 +67,6 @@ public ResponseEntity<String> archiveCustomer(@PathVariable Long id) {
         return ResponseEntity.notFound().build();
     }
 }
-
 
 //Supprimer un client
 /*@PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_EMPLOYEE')")
